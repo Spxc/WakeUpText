@@ -2,6 +2,7 @@ package com.spxc.wakeuptext;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.spxc.wakeuptext.adapter.TabsAdapter;
 import com.spxc.wakeuptext.frag.Fragment_1;
 import com.spxc.wakeuptext.frag.Fragment_2;
@@ -34,10 +35,14 @@ public class MainActivity extends SherlockFragmentActivity {
 		
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
 		mTabsAdapter.addTab(abs.newTab().setText("Received Texts"), Fragment_1.class, null);
-		mTabsAdapter.addTab(abs.newTab().setText("Preferences"), Fragment_2.class, null);
-		
-		
+		mTabsAdapter.addTab(abs.newTab().setText("Whitelist"), Fragment_2.class, null);	
 	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.main, menu);
+		return true;
+    }
 	
 	@Override
     protected void onResume() {

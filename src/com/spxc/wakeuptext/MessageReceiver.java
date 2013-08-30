@@ -13,12 +13,15 @@ public class MessageReceiver extends BroadcastReceiver {
              Bundle pudsBundle = intent.getExtras();
              Object[] pdus = (Object[]) pudsBundle.get("pdus");
              SmsMessage messages =SmsMessage.createFromPdu((byte[]) pdus[0]);    
-                 if(messages.getMessageBody().contains("Hi")) {
-                	 //Crouton.makeText(null, "SMS READ", Style.ALERT).show();
+             /*if (messages.getOriginatingAddress().contains("")){
+            	 
+             }*/
+                 if(messages.getMessageBody().contains("Wakeup")) {
                 	 Intent in = new Intent("SmsMessage.intent.MAIN").
                 	         putExtra("get_msg", messages.getMessageBody());
                 	 context.sendBroadcast(in);
                 	 Log.d("Received", messages.getMessageBody());
+                	 Log.d("Received", messages.getOriginatingAddress());
                      abortBroadcast();
              }
     }
