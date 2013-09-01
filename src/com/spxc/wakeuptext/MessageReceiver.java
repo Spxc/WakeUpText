@@ -17,6 +17,7 @@ public class MessageReceiver extends BroadcastReceiver {
             	 
              }*/
                  if(messages.getMessageBody().contains("Wakeup")) {
+                	 
                 	 Intent in = new Intent("SmsMessage.intent.MAIN").
                 	         putExtra("get_msg", messages.getMessageBody());
                 	 context.sendBroadcast(in);

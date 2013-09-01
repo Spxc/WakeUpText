@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
  
 public class DatabaseHandler extends SQLiteOpenHelper {
  
@@ -19,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "contactsManager";
  
     // Contacts table name
-    private static final String TABLE_CONTACTS = "contacts";
+    public static final String TABLE_CONTACTS = "contacts";
  
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
@@ -33,7 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE" + TABLE_CONTACTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_PH_NO + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
@@ -53,7 +54,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
  
-    // Adding new contact
+    public // Adding new contact
     void addContact(WhiteList contact) {
         SQLiteDatabase db = this.getWritableDatabase();
  
@@ -139,5 +140,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
- 
+    
+    public boolean exists(String number){
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	String sql = "SELECT * FROM " + TABLE_CONTACTS + " WHERE phone_number = '" + number + "'";
+    	Cursor cursor = db.rawQuery(sql, null);
+    	if (cursor.moveToFirst()) {
+    		Log.d("TAG0", "den er her");
+    	} else {
+    		Log.d("TAG0", "den er her ikke");
+    	}
+		return true;
+    	
+    }
 }
