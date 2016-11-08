@@ -43,7 +43,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(abs.newTab().setText("Whitelist"), Fragment_2.class, null);	
 		
 		DatabaseHandler db = new DatabaseHandler(this);
-        db.exists("45482764");
+        db.exists("phonenumber");
 	}
 	
 	@Override
